@@ -476,9 +476,13 @@
       .action-bar,
       .del-btn,
       .tab-bar,
-      #logoUploadBox,
-      #salesInfoBox {
+      #logoUploadBox {
         display: none !important
+      }
+
+      .footer-input {
+        border: none !important;
+        border-bottom: none !important;
       }
 
       body {
@@ -682,6 +686,8 @@
             oninput="document.getElementById('prevCust').textContent=this.value"></div>
         <div class="fld"><label>日期（民國）</label><input type="text" id="quoteDate" value=""
             oninput="document.getElementById('prevDate').textContent=this.value"></div>
+        <div class="fld"><label>業務人員（其他格式預設）</label><input type="text" id="salesInfo"
+            value="承辦業務：潘信宏 0960123533&#10;內勤業務：許苔莉" oninput="updateFooter()"></div>
       </div>
       <div class="cust-row">
         <div class="fld"><label>部門（僅雲端搜尋用）</label><input type="text" id="custDept" placeholder="例：資訊處"></div>
@@ -821,10 +827,6 @@
           </tfoot>
         </table>
         <div class="footer-info" id="footerInfo"></div>
-        <div class="cust-row" id="salesInfoBox" style="margin-top:8px;">
-          <div class="fld"><label>業務人員（顯示在報價單）</label><input type="text" id="salesInfo"
-              value="承辦業務：潘信宏 0960123533&#10;內勤業務：許苔莉" oninput="updateFooter()" style="width:100%"></div>
-        </div>
       </div>
     </div>
   </div>
@@ -1476,7 +1478,7 @@
         englishName: '',
         headerLayout: 'logo-left-divider',
         tableHeaderStyle: 'normal',
-        footerTemplate: '交貨日期：<br>付款方式：<br>備　　註：<br>保　　固：依據原廠保固<br>公司信箱：sales@cy.com.tw',
+        footerTemplate: '交貨日期：<input type="text" class="footer-input" value="30天" style="width:200px;border:none;border-bottom:1px solid #999;outline:none;font-size:inherit;font-family:inherit;" oninput=""><br>付款方式：<input type="text" class="footer-input" value="依單位規定" style="width:200px;border:none;border-bottom:1px solid #999;outline:none;font-size:inherit;font-family:inherit;" oninput=""><br>備\u3000\u3000註：<input type="text" class="footer-input" value="" style="width:200px;border:none;border-bottom:1px solid #999;outline:none;font-size:inherit;font-family:inherit;" oninput=""><br>保\u3000\u3000固：依據原廠保固<br>公司信箱：sales@cy.com.tw<br>承辦業務：<input type="text" class="footer-input" value="潘信宏 / 0960123533" style="width:200px;border:none;border-bottom:1px solid #999;outline:none;font-size:inherit;font-family:inherit;"><br>業務助理：<input type="text" class="footer-input" value="許苔莉" style="width:200px;border:none;border-bottom:1px solid #999;outline:none;font-size:inherit;font-family:inherit;">',
         defaultSales: '承辦業務：潘信宏 / 0960123533    業務助理：許苔莉',
         theme: 'theme-cy2'
       },
@@ -1627,9 +1629,11 @@
       const sel = document.getElementById('companySel').value;
       const t = COMPANY_TEMPLATES[sel];
       if (!t) return;
-      const sales = document.getElementById('salesInfo').value;
       let html = t.footerTemplate;
-      if (sales) html += '<br>' + sales.replace(/\n/g, '<br>');
+      if (sel !== 'cy2') {
+        const sales = document.getElementById('salesInfo').value;
+        if (sales) html += '<br>' + sales.replace(/\n/g, '<br>');
+      }
       document.getElementById('footerInfo').innerHTML = html;
     }
 
