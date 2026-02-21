@@ -476,7 +476,8 @@
       .action-bar,
       .del-btn,
       .tab-bar,
-      #logoUploadBox {
+      #logoUploadBox,
+      #salesInfoBox {
         display: none !important
       }
 
@@ -820,7 +821,7 @@
           </tfoot>
         </table>
         <div class="footer-info" id="footerInfo"></div>
-        <div class="cust-row" style="margin-top:8px;">
+        <div class="cust-row" id="salesInfoBox" style="margin-top:8px;">
           <div class="fld"><label>業務人員（顯示在報價單）</label><input type="text" id="salesInfo"
               value="承辦業務：潘信宏 0960123533&#10;內勤業務：許苔莉" oninput="updateFooter()" style="width:100%"></div>
         </div>
@@ -1475,7 +1476,7 @@
         englishName: '',
         headerLayout: 'logo-left-divider',
         tableHeaderStyle: 'normal',
-        footerTemplate: '交貨日期：<br>付款方式：<br>備　　註：<br>保　　固：依據原廠保固<br>公司信箱：sungmin@cy.com.tw',
+        footerTemplate: '交貨日期：<br>付款方式：<br>備　　註：<br>保　　固：依據原廠保固<br>公司信箱：sales@cy.com.tw',
         defaultSales: '承辦業務：潘信宏 / 0960123533    業務助理：許苔莉',
         theme: 'theme-cy2'
       },
